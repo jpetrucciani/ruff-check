@@ -29,15 +29,15 @@ None
 ## Example usage
 
 ```yaml
-uses: jpetrucciani/ruff-check@master
+uses: jpetrucciani/ruff-check@main
 
 # or specify a path!
-uses: jpetrucciani/ruff-check@master
+uses: jpetrucciani/ruff-check@main
 with:
   path: '.'
 
 # or specify more flags!
-uses: jpetrucciani/ruff-check@master
+uses: jpetrucciani/ruff-check@main
 with:
   flags: '--exclude ./env/'
 ```
