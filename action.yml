@@ -1,0 +1,29 @@
+# action.yml
+name: 'Ruff Check'
+description: 'GitHub action to run ruff on your python repository'
+branding:
+  icon: 'check-square'
+  color: 'ruff'
+inputs:
+  path:
+    description: 'File or directory to run ruff on'
+    required: false
+    default: '.'
+  flags:
+    description: 'Optional ruff flags (refer to `ruff --help`)'
+    required: false
+    default: ''
+  format:
+    description: 'Format to output ruff messages in'
+    required: false
+    default: 'github'
+outputs:
+  output:
+    description: 'The output of ruff'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.path }}
+    - ${{ inputs.flags }}
+    - ${{ inputs.format }}
