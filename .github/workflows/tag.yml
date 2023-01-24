@@ -19,7 +19,7 @@ jobs:
         if: steps.var.outputs.create_tag == 'true'
         env:
           VERSION: ${{ steps.var.outputs.version }}
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --global user.name 'jacobi petrucciani'
           git config --global user.email 'jpetrucciani@users.noreply.github.com'
