@@ -16,7 +16,7 @@ jobs:
           echo "version=$version" >>$GITHUB_OUTPUT
           echo "create_tag=$create_tag" >>$GITHUB_OUTPUT
       - name: tag
-        if: steps.var.outputs.create_tag == true
+        if: steps.var.outputs.create_tag == 'true'
         run: |
           git config --global user.name 'jacobi petrucciani'
           git config --global user.email 'jpetrucciani@users.noreply.github.com'

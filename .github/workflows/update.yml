@@ -20,7 +20,7 @@ jobs:
           pip freeze | grep 'ruff==' >requirements.txt
           version="$(sed -E 's#ruff==(.*)#\1#g' ./requirements.txt)"
           echo "version=$version" >>$GITHUB_OUTPUT
-          echo "message='automatic ruff update ($version)'" >>$GITHUB_OUTPUT
+          echo "message=automatic ruff update [$version]" >>$GITHUB_OUTPUT
       - uses: peter-evans/create-pull-request@v3.10.0
         id: new_pull_request
         with:
