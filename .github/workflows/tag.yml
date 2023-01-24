@@ -12,11 +12,11 @@ jobs:
       - id: var
         run: |
           version="$(sed -E 's#ruff==(.*)#\1#g' ./requirements.txt)"
-          create_tag="$(git ls-remote --exit-code origin "refs/tags/$version" >/dev/null && echo 0 || echo 1)"
+          create_tag="$(git ls-remote --exit-code origin "refs/tags/$version" >/dev/null && echo false || echo true)"
           echo "version=$version" >>$GITHUB_OUTPUT
           echo "create_tag=$create_tag" >>$GITHUB_OUTPUT
       - name: tag
-        if: steps.var.outputs.create_tag == "1"
+        if: steps.var.outputs.create_tag == true
         run: |
           git config --global user.name 'jacobi petrucciani'
           git config --global user.email 'jpetrucciani@users.noreply.github.com'
