@@ -1,0 +1,23 @@
+name: lint
+
+on:
+  push: {branches: [main]}
+
+jobs:
+  tag:
+    name: tag
+    runs-on: ubuntu-22.04
+    steps:
+      - uses: actions/checkout@v3
+      - id: var
+        run: |
+          version="$(sed -E 's#ruff==(.*)#\1#g' ./requirements.txt)"
+          create_tag="$(git ls-remote --exit-code origin "refs/tags/$version" >/dev/null && echo false || echo true)"
+          echo "version=$version" >>$GITHUB_OUTPUT
+          echo "create_tag=$create_tag" >>$GITHUB_OUTPUT
+      - name: tag
+        if: steps.var.outputs.create_tag
+        uses: jaywcjlove/create-tag-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          tag: ${{ steps.var.outputs.version }}
