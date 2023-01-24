@@ -19,10 +19,9 @@ jobs:
         if: steps.var.outputs.create_tag == 'true'
         env:
           VERSION: ${{ steps.var.outputs.version }}
-          TOKEN: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
         run: |
           git config --global user.name 'jacobi petrucciani'
           git config --global user.email 'jpetrucciani@users.noreply.github.com'
-          git remote set-url origin https://$TOKEN@github.com/${GITHUB_REPOSITORY}
+          git remote set-url origin https://${{ secrets.PERSONAL_ACCESS_TOKEN }}@github.com/${GITHUB_REPOSITORY}
           git tag -a "$VERSION" -m "$VERSION"
           git push --tags
