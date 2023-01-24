@@ -23,6 +23,6 @@ jobs:
         run: |
           git config --global user.name 'jacobi petrucciani'
           git config --global user.email 'jpetrucciani@users.noreply.github.com'
-          git remote set-url origin https://x-access-token:${TOKEN}@github.com/${GITHUB_REPOSITORY}
+          git remote set-url origin https://x-access-token:$TOKEN@github.com/${GITHUB_REPOSITORY}
           git tag -a "$VERSION" -m "$VERSION"
           git push --tags
