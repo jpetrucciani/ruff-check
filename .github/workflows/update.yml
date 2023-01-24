@@ -13,16 +13,20 @@ jobs:
         with:
           python-version: '3.10'
           architecture: x64
-      - name: check version
+      - id: version
+        name: check version
         run: |
           pip install -U ruff
           pip freeze | grep 'ruff==' >requirements.txt
+          version="$(sed -E 's#ruff==(.*)#\1#g' ./requirements.txt)"
+          echo "version=$version" >>$GITHUB_OUTPUT
+          echo "message='automatic ruff update ($version)'" >>$GITHUB_OUTPUT
       - uses: peter-evans/create-pull-request@v3.10.0
         id: new_pull_request
         with:
           delete-branch: true
-          title: automatic ruff update
-          commit-message: automatic ruff update
+          title: ${{ steps.version.outputs.message }}
+          commit-message: ${{ steps.version.outputs.message }}
           branch: automatic-ruff-update
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - if: steps.new_pull_request.outputs.pull-request-url != ''
