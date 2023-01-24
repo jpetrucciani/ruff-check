@@ -1,4 +1,4 @@
-name: lint
+name: tag
 
 on:
   push: {branches: [main]}
@@ -16,8 +16,10 @@ jobs:
           echo "version=$version" >>$GITHUB_OUTPUT
           echo "create_tag=$create_tag" >>$GITHUB_OUTPUT
       - name: tag
-        if: steps.var.outputs.create_tag
-        uses: jaywcjlove/create-tag-action@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.var.outputs.version }}
+        if: steps.var.outputs.create_tag == true
+        run: |
+          git config --global user.name 'jacobi petrucciani'
+          git config --global user.email 'jpetrucciani@users.noreply.github.com'
+          git remote set-url origin https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/$GITHUB_REPOSITORY
+          git tag -a ${{ steps.var.outputs.version }}
+          git push --tags
