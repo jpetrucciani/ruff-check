@@ -1,4 +1,4 @@
-name: lint
+name: tag
 
 on:
   push: {branches: [main]}
@@ -20,4 +20,4 @@ jobs:
         uses: jaywcjlove/create-tag-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          tag: ${{ steps.var.outputs.version }}
+          version: ${{ steps.var.outputs.version }}
