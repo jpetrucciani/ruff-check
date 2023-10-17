@@ -8,7 +8,7 @@ jobs:
     name: tag
     runs-on: ubuntu-22.04
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4.1.0
         with:
           token: ${{ secrets.PERSONAL_ACCESS_TOKEN }}
       - id: var
